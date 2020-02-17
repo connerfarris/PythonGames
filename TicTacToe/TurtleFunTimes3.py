@@ -4,7 +4,7 @@ title("Tic Tac Toe!")
 bgcolor("black")
 setup(500, 500)
 hideturtle()
-speed(10)
+# speed(10)
 
 
 def square(size):
@@ -29,7 +29,7 @@ def squareAt(x, y, size):
 	end_fill()
 
 
-def drawXorO()
+# def drawXorO()
 
 
 def drawBoard(x, y):

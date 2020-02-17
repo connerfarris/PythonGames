@@ -4,9 +4,9 @@ def printBoard(board):
 
 
 def play(board, player):
-	tileMap = {1: [0,0], 2: [1, 0], 3: [2, 0], 4: [0, 1], 5: [1, 1], 6: [1, 2], 7: [2, 0], 8: [2, 1], 9: [2, 2]}
+	tileMap = {1: [0, 0], 2: [1, 0], 3: [2, 0], 4: [0, 1], 5: [1, 1], 6: [2, 1], 7: [0, 2], 8: [1, 2], 9: [2, 2]}
 	tile = int(input('which tile will you play on? '))
-	while (tile not in {1,2,3,4,5,6,7,8,9}):
+	while (tile not in {1, 2, 3, 4, 5, 6, 7, 8, 9} or board[tileMap[tile][1]][tileMap[tile][0]] != '_'):
 		print('invalid move, try again')
 		tile = int(input('which tile will you play on? '))
 	board[tileMap[tile][1]][tileMap[tile][0]] = player
@@ -19,7 +19,7 @@ def draw(board):
 	return True
 
 
-def gameOn(board):
+def isGameActive(board):
 	if (draw(board)):
 		return False
 	winningLines = [[[0, 0], [0, 1], [0, 2]], [[1, 0], [1, 1], [1, 2]], [[2, 0], [2, 1], [2, 2]],
@@ -35,10 +35,10 @@ def gameOn(board):
 	return True
 
 
-def continuousGame():
+def game():
 	board = [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']]
 	player = 'X'
-	while (gameOn(board) == True):
+	while (isGameActive(board) == True):
 		play(board, player)
 		if (player == 'X'):
 			player = 'O'
@@ -48,10 +48,13 @@ def continuousGame():
 		printBoard(board)
 		print()
 
-	if (player == 'X'):
-		print('\nCongrats O!')
+	if (draw(board)):
+		print('\nIt\'s a draw!')
 	else:
-		print('\nCongrats X!')
+		if (player == 'X'):
+			print('\nCongrats O!')
+		else:
+			print('\nCongrats X!')
 
 
-continuousGame()
+game()
